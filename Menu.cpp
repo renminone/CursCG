@@ -3,14 +3,14 @@ int l = 1;
 
 int Menu::menu()
 {
-	Figure paral_1(0), paral_2(1);//Создание обёкта 2 пар-дов, инициализация по умолчанию
+	Figure paral_1(0), paral_2(1);//Г‘Г®Г§Г¤Г Г­ГЁГҐ Г®ГЎВёГЄГІГ  2 ГЇГ Г°-Г¤Г®Гў, ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 	char choice = '0';
 	do
 	{
-		if (l == 1) { initwindow(1920, 1080); l = 0; } //Чтоб окна не открывались постоянно.
+		if (l == 1) { initwindow(1920, 1080); l = 0; } //Г—ГІГ®ГЎ Г®ГЄГ­Г  Г­ГҐ Г®ГІГЄГ°Г»ГўГ Г«ГЁГ±Гј ГЇГ®Г±ГІГ®ГїГ­Г­Г®.
 		system("cls");
-		cout << "Меню: " << endl;
-		cout << "Для выхода нажмите 0. Любая другая клавиша нарисует фигуры и отправит в выбор режима." << endl;
+		cout << "ГЊГҐГ­Гѕ: " << endl;
+		cout << "Г„Г«Гї ГўГ»ГµГ®Г¤Г  Г­Г Г¦Г¬ГЁГІГҐ 0. Г‹ГѕГЎГ Гї Г¤Г°ГіГЈГ Гї ГЄГ«Г ГўГЁГёГ  Г­Г Г°ГЁГ±ГіГҐГІ ГґГЁГЈГіГ°Г» ГЁ Г®ГІГЇГ°Г ГўГЁГІ Гў ГўГ»ГЎГ®Г° Г°ГҐГ¦ГЁГ¬Г ." << endl;
 		choice = _getch();
 		if (choice == '0') break;
 		menu_par(par1, par2);
@@ -19,24 +19,24 @@ int Menu::menu()
 }
 void Menu::moving(Figure& obg, Figure& par)
 {
-	cout << "Режим перемещения: " << endl;
-	cout << "WS - по оси y." << endl;
-	cout << "AD - по оси x" << endl;
-	cout << "QE - по оси z" << endl;
+	cout << "ГђГҐГ¦ГЁГ¬ ГЇГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГї: " << endl;
+	cout << "WS - ГЇГ® Г®Г±ГЁ y." << endl;
+	cout << "AD - ГЇГ® Г®Г±ГЁ x" << endl;
+	cout << "QE - ГЇГ® Г®Г±ГЁ z" << endl;
 	do
 	{
-		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) { cout << "Выход из режима перемещения успешно!" << endl; break; }
-		if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) //Перемещение по Z вперед
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) { cout << "Г‚Г»ГµГ®Г¤ ГЁГ§ Г°ГҐГ¦ГЁГ¬Г  ГЇГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГї ГіГ±ГЇГҐГёГ­Г®!" << endl; break; }
+		if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) //ГЏГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ ГЇГ® Z ГўГЇГҐГ°ГҐГ¤
 		{ clearviewport(); obg.move(9); par.move(9); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //Перемещение по Y вниз
+		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //ГЏГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ ГЇГ® Y ГўГ­ГЁГ§
 		{ clearviewport(); obg.move(2); par.move(2); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'E') & 0x8000) //перемещение по Z назад
+		if (GetAsyncKeyState((unsigned short)'E') & 0x8000) //ГЇГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ ГЇГ® Z Г­Г Г§Г Г¤
 		{ clearviewport(); obg.move(7); par.move(7); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'W') & 0x8000) //Перемещение по Y вверх
+		if (GetAsyncKeyState((unsigned short)'W') & 0x8000) //ГЏГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ ГЇГ® Y ГўГўГҐГ°Гµ
 		{ clearviewport(); obg.move(8); par.move(8); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'D') & 0x8000) //Перемещение по X вправо
+		if (GetAsyncKeyState((unsigned short)'D') & 0x8000) //ГЏГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ ГЇГ® X ГўГЇГ°Г ГўГ®
 		{ clearviewport(); obg.move(6); par.move(6); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'A') & 0x8000) //перемещение по X влево
+		if (GetAsyncKeyState((unsigned short)'A') & 0x8000) //ГЇГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ ГЇГ® X ГўГ«ГҐГўГ®
 		{ clearviewport(); obg.move(4); par.move(4); par.draw(); obg.draw(); }
 	}
 	while (1);
@@ -44,15 +44,15 @@ void Menu::moving(Figure& obg, Figure& par)
 
 void Menu::scaling(Figure& obg, Figure& par)
 {
-	cout << "Режим масштабирования: " << endl;
-	cout << "W - расширение." << endl;
-	cout << "S - сжатие." << endl;
+	cout << "ГђГҐГ¦ГЁГ¬ Г¬Г Г±ГёГІГ ГЎГЁГ°Г®ГўГ Г­ГЁГї: " << endl;
+	cout << "W - Г°Г Г±ГёГЁГ°ГҐГ­ГЁГҐ." << endl;
+	cout << "S - Г±Г¦Г ГІГЁГҐ." << endl;
 	do
 	{
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) break;
-		if (GetAsyncKeyState((unsigned short)'W') & 0x8000) //Расширение
+		if (GetAsyncKeyState((unsigned short)'W') & 0x8000) //ГђГ Г±ГёГЁГ°ГҐГ­ГЁГҐ
 		{ clearviewport(); obg.scale(3); par.scale(3); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //Сжатие
+		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //Г‘Г¦Г ГІГЁГҐ
 		{ clearviewport(); obg.scale(1); par.scale(1); par.draw(); obg.draw(); }
 	}
 	while (1);
@@ -60,33 +60,33 @@ void Menu::scaling(Figure& obg, Figure& par)
 
 void Menu::rotating(Figure& obg, Figure& par)
 {
-	cout << "Режим вращения: " << endl;
-	cout << "WS - по оси y." << endl;
-	cout << "AD - по оси x" << endl;
-	cout << "QE - по оси z" << endl;
+	cout << "ГђГҐГ¦ГЁГ¬ ГўГ°Г Г№ГҐГ­ГЁГї: " << endl;
+	cout << "WS - ГЇГ® Г®Г±ГЁ y." << endl;
+	cout << "AD - ГЇГ® Г®Г±ГЁ x" << endl;
+	cout << "QE - ГЇГ® Г®Г±ГЁ z" << endl;
 	do
 	{
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) break;
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) break;
-		if (GetAsyncKeyState((unsigned short)'A') & 0x8000) //Вращать вокруг х против часовой
+		if (GetAsyncKeyState((unsigned short)'A') & 0x8000) //Г‚Г°Г Г№Г ГІГј ГўГ®ГЄГ°ГіГЈ Гµ ГЇГ°Г®ГІГЁГў Г·Г Г±Г®ГўГ®Г©
 		{ clearviewport(); obg.rotate(1, 0); par.rotate(1, 0); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //Вращать вокруг х по часовой
+		if (GetAsyncKeyState((unsigned short)'D') & 0x8000) //Г‚Г°Г Г№Г ГІГј ГўГ®ГЄГ°ГіГЈ Гµ ГЇГ® Г·Г Г±Г®ГўГ®Г©
 		{ clearviewport(); obg.rotate(1, 1); par.rotate(1, 1); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'W') & 0x8000) //Вращать вокруг y по часовой
+		if (GetAsyncKeyState((unsigned short)'W') & 0x8000) //Г‚Г°Г Г№Г ГІГј ГўГ®ГЄГ°ГіГЈ y ГЇГ® Г·Г Г±Г®ГўГ®Г©
 		{ clearviewport(); obg.rotate(2, 0); par.rotate(2, 0); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //Вращать вокруг y против часовой
+		if (GetAsyncKeyState((unsigned short)'S') & 0x8000) //Г‚Г°Г Г№Г ГІГј ГўГ®ГЄГ°ГіГЈ y ГЇГ°Г®ГІГЁГў Г·Г Г±Г®ГўГ®Г©
 		{ clearviewport(); obg.rotate(2, 1); par.rotate(2, 1); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) //Вращать вокруг z против часовой
+		if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) //Г‚Г°Г Г№Г ГІГј ГўГ®ГЄГ°ГіГЈ z ГЇГ°Г®ГІГЁГў Г·Г Г±Г®ГўГ®Г©
 		{ clearviewport(); obg.rotate(3, 0); par.rotate(3, 0); par.draw(); obg.draw(); }
-		if (GetAsyncKeyState((unsigned short)'E') & 0x8000) //Вращать вокруг z по часовой
+		if (GetAsyncKeyState((unsigned short)'E') & 0x8000) //Г‚Г°Г Г№Г ГІГј ГўГ®ГЄГ°ГіГЈ z ГЇГ® Г·Г Г±Г®ГўГ®Г©
 		{ clearviewport(); obg.rotate(3, 1); par.rotate(3, 1); par.draw(); obg.draw(); }
 	} while (1);
 }
 
 void Menu::menu_par(Figure& obg, Figure& par)
 {
-	cout << "Выберите режим :" << endl;
-	cout << "M - перемещение." << endl << "S - масштабирование." << endl << "R - вращение." << endl;
+	cout << "Г‚Г»ГЎГҐГ°ГЁГІГҐ Г°ГҐГ¦ГЁГ¬ :" << endl;
+	cout << "M - ГЇГҐГ°ГҐГ¬ГҐГ№ГҐГ­ГЁГҐ." << endl << "S - Г¬Г Г±ГёГІГ ГЎГЁГ°Г®ГўГ Г­ГЁГҐ." << endl << "R - ГўГ°Г Г№ГҐГ­ГЁГҐ." << endl;
 	par.draw(); obg.draw();
 	do
 	{
