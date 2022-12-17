@@ -10,12 +10,12 @@
 using namespace std;
 class Figure
 {
-	float A[8][4];//Матрица с точками параллелипипида
-	float Matr_of_flat_equation[4][6];//Матрица уравнений плоскости
-	float mull_equ_and_light[6];// Матрица произведений уравнений плоскости на вектор источника света
-	float mull_equ_and_observer[6];//Матрица произведений уравнений плоскости на вектор наблюдателя
-	int observer[4];//Точка наблюдения, задаётся в конструкторе
-	int light[4];//Точка источника света(в бесконечности,типа =))), задаётся в конструкторе
+	float A[8][4];//РњР°С‚СЂРёС†Р° СЃ С‚РѕС‡РєР°РјРё РїР°СЂР°Р»Р»РµР»РёРїРёРїРёРґР°
+	float Matr_of_flat_equation[4][6];//РњР°С‚СЂРёС†Р° СѓСЂР°РІРЅРµРЅРёР№ РїР»РѕСЃРєРѕСЃС‚Рё
+	float mull_equ_and_light[6];// РњР°С‚СЂРёС†Р° РїСЂРѕРёР·РІРµРґРµРЅРёР№ СѓСЂР°РІРЅРµРЅРёР№ РїР»РѕСЃРєРѕСЃС‚Рё РЅР° РІРµРєС‚РѕСЂ РёСЃС‚РѕС‡РЅРёРєР° СЃРІРµС‚Р°
+	float mull_equ_and_observer[6];//РњР°С‚СЂРёС†Р° РїСЂРѕРёР·РІРµРґРµРЅРёР№ СѓСЂР°РІРЅРµРЅРёР№ РїР»РѕСЃРєРѕСЃС‚Рё РЅР° РІРµРєС‚РѕСЂ РЅР°Р±Р»СЋРґР°С‚РµР»СЏ
+	int observer[4];//РўРѕС‡РєР° РЅР°Р±Р»СЋРґРµРЅРёСЏ, Р·Р°РґР°С‘С‚СЃСЏ РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРµ
+	int light[4];//РўРѕС‡РєР° РёСЃС‚РѕС‡РЅРёРєР° СЃРІРµС‚Р°(РІ Р±РµСЃРєРѕРЅРµС‡РЅРѕСЃС‚Рё,С‚РёРїР° =))), Р·Р°РґР°С‘С‚СЃСЏ РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРµ
 	float center[3];
 	int y_floor;
 public:
@@ -24,14 +24,14 @@ public:
 	Figure& operator=(Figure& f);
 	Figure & operator*(Vertex & Bb);
 	~Figure();
-	void drawgran(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3, int flag, int flag2);//Рисование грани
-	void del_invisible_line();//Удаление невидимых граней
-	void equation_of_flat(int num_of_flat, int T1, int T2, int T3, int T4);//num_of_flat номер плоскости результата, t1, t2, t3 порядок точек в матрице
-	void draw();//Рисование фигуры
-	int fill(int x_pixel, int y_pixel, int flag, bool** array_of_paint_pixel); // flag = 0 в тени, flag = 1 в цвете.
-	void draw_shadow();//Рисование тени
-	void move(int flag);//Перемешение
-	void scale(int flag);//Масштабирование
-	void rotate(int flag, int flag2);//Вращение
-	bool going_abroad();//Проверка на выход за границу экрана
+	void drawgran(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3, int flag, int flag2);//Р РёСЃРѕРІР°РЅРёРµ РіСЂР°РЅРё
+	void del_invisible_line();//РЈРґР°Р»РµРЅРёРµ РЅРµРІРёРґРёРјС‹С… РіСЂР°РЅРµР№
+	void equation_of_flat(int num_of_flat, int T1, int T2, int T3, int T4);//num_of_flat РЅРѕРјРµСЂ РїР»РѕСЃРєРѕСЃС‚Рё СЂРµР·СѓР»СЊС‚Р°С‚Р°, t1, t2, t3 РїРѕСЂСЏРґРѕРє С‚РѕС‡РµРє РІ РјР°С‚СЂРёС†Рµ
+	void draw();//Р РёСЃРѕРІР°РЅРёРµ С„РёРіСѓСЂС‹
+	int fill(int x_pixel, int y_pixel, int flag, bool** array_of_paint_pixel); // flag = 0 РІ С‚РµРЅРё, flag = 1 РІ С†РІРµС‚Рµ.
+	void draw_shadow();//Р РёСЃРѕРІР°РЅРёРµ С‚РµРЅРё
+	void move(int flag);//РџРµСЂРµРјРµС€РµРЅРёРµ
+	void scale(int flag);//РњР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРµ
+	void rotate(int flag, int flag2);//Р’СЂР°С‰РµРЅРёРµ
+	bool going_abroad();//РџСЂРѕРІРµСЂРєР° РЅР° РІС‹С…РѕРґ Р·Р° РіСЂР°РЅРёС†Сѓ СЌРєСЂР°РЅР°
 };
