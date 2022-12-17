@@ -1,5 +1,5 @@
 #include "Figure.h"
-Figure::Figure(int flag)//Конструктор для инициализации вершин паралелипипедов(Инициализируется константными значениями)
+Figure::Figure(int flag)//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РІРµСЂС€РёРЅ РїР°СЂР°Р»РµР»РёРїРёРїРµРґРѕРІ(РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚СЃСЏ РєРѕРЅСЃС‚Р°РЅС‚РЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё)
 {
 	for (int i = 0; i < 6; i++)
 	{
@@ -30,11 +30,11 @@ Figure::Figure(int flag)//Конструктор для инициализации вершин паралелипипедов(И
 	}
 	float a = 0, b = 0, c = 0;
 	for (int i = 0; i < 8; i++) { a += A[i][0]; b += A[i][1]; c += A[i][2]; }
-	a /= 8; b /= 8; c /= 8; //Если сразу в center сделать, будет исключение.
+	a /= 8; b /= 8; c /= 8; //Р•СЃР»Рё СЃСЂР°Р·Сѓ РІ center СЃРґРµР»Р°С‚СЊ, Р±СѓРґРµС‚ РёСЃРєР»СЋС‡РµРЅРёРµ.
 	center[0] = a; center[1] = b; center[2] = c;
-	observer[0] = 0; observer[1] = 0; observer[2] = 2000; observer[3] = 1; //Вектор наблюдателя.
-	light[0] = 0; light[1] = -1000; light[2] = 0; light[3] = 1; //Вектор света.
-	y_floor = 700; //Пол
+	observer[0] = 0; observer[1] = 0; observer[2] = 2000; observer[3] = 1; //Р’РµРєС‚РѕСЂ РЅР°Р±Р»СЋРґР°С‚РµР»СЏ.
+	light[0] = 0; light[1] = -1000; light[2] = 0; light[3] = 1; //Р’РµРєС‚РѕСЂ СЃРІРµС‚Р°.
+	y_floor = 700; //РџРѕР»
 }
 Figure::Figure(const Figure& F) { for (int i = 0; i < 8; i++) for (int j = 0; j < 4; j++) A[i][0] = F.A[i][0]; }
 Figure& Figure::operator=(Figure& f)
@@ -44,7 +44,7 @@ Figure& Figure::operator=(Figure& f)
 }
 Figure& Figure::operator*(Vertex& Bb)
 {
-	// Умножение матриц A и Bb.b
+	// РЈРјРЅРѕР¶РµРЅРёРµ РјР°С‚СЂРёС† A Рё Bb.b
 	double tmp[8][4];
 	for (int i = 0; i < 8; i++)
 	{
@@ -58,17 +58,17 @@ Figure& Figure::operator*(Vertex& Bb)
 }
 Figure::~Figure() { }
 void Figure::drawgran(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3, int flag, int flag2)
-//flag: 1 - цвет, 0 - тень. flag2: 0 - рёбра, отличные от тени.
+//flag: 1 - С†РІРµС‚, 0 - С‚РµРЅСЊ. flag2: 0 - СЂС‘Р±СЂР°, РѕС‚Р»РёС‡РЅС‹Рµ РѕС‚ С‚РµРЅРё.
 {
-	bool** array_of_paint_pixel;//Массив для закрашеных и не закрашеных пикселей
+	bool** array_of_paint_pixel;//РњР°СЃСЃРёРІ РґР»СЏ Р·Р°РєСЂР°С€РµРЅС‹С… Рё РЅРµ Р·Р°РєСЂР°С€РµРЅС‹С… РїРёРєСЃРµР»РµР№
 	array_of_paint_pixel = new bool* [770];
 	for (int i = 0; i < 770; i++)
 	{
 		array_of_paint_pixel[i] = new bool[1370];
-		for (int j = 0; j < 1370; j++) array_of_paint_pixel[i][j] = false;//Изначатьно все не закрашены
+		for (int j = 0; j < 1370; j++) array_of_paint_pixel[i][j] = false;//РР·РЅР°С‡Р°С‚СЊРЅРѕ РІСЃРµ РЅРµ Р·Р°РєСЂР°С€РµРЅС‹
 	}
 	int color_1, color_2, color_3;
-	if (flag == 1) { color_1 = 255; color_2 = color_3 = 0; } //Цвет.
+	if (flag == 1) { color_1 = 255; color_2 = color_3 = 0; } //Р¦РІРµС‚.
 	else
 	{
 		if (flag2 == 0) color_1 = color_2 = color_3 = 70;
@@ -94,7 +94,7 @@ void Figure::drawgran(float x0, float y0, float x1, float y1, float x2, float y2
 			if (e2 < dy) { err += dx; B[i][1] += sy; }
 		}
 	}
-	//Заливка
+	//Р—Р°Р»РёРІРєР°
 	fill(round((x0 + x1 + x2 + x3) / 4), round((y0 + y1 + y2 + y3) / 4), flag, array_of_paint_pixel);
 	for (int i = 0; i < 770; i++) delete[] array_of_paint_pixel[i];
 	delete[] array_of_paint_pixel;
@@ -107,24 +107,24 @@ void Figure::del_invisible_line()
 		mull_equ_and_light[i] = 0;
 		mull_equ_and_observer[i] = 0;
 	}
-	//получим матрицу уравнений плоскостей граней
-	equation_of_flat(0, 0, 1, 3, 2);// грань из точек 0-1-2-3
-	equation_of_flat(1, 6, 5, 7, 4);// грань из точек 4-5-6-7
-	equation_of_flat(2, 0, 4, 1, 5);// грань из точек 0-1-5-4
-	equation_of_flat(3, 1, 5, 2, 6);// грань из точек 5-1-2-6
-	equation_of_flat(4, 2, 6, 3, 7);// грань из точек 6-2-3-7
-	equation_of_flat(5, 3, 7, 0, 4);// грань из точек 7-3-0-4
-	//Проверка через точку, лежащую в центре параллелепипеда
+	//РїРѕР»СѓС‡РёРј РјР°С‚СЂРёС†Сѓ СѓСЂР°РІРЅРµРЅРёР№ РїР»РѕСЃРєРѕСЃС‚РµР№ РіСЂР°РЅРµР№
+	equation_of_flat(0, 0, 1, 3, 2);// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 0-1-2-3
+	equation_of_flat(1, 6, 5, 7, 4);// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 4-5-6-7
+	equation_of_flat(2, 0, 4, 1, 5);// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 0-1-5-4
+	equation_of_flat(3, 1, 5, 2, 6);// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 5-1-2-6
+	equation_of_flat(4, 2, 6, 3, 7);// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 6-2-3-7
+	equation_of_flat(5, 3, 7, 0, 4);// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 7-3-0-4
+	//РџСЂРѕРІРµСЂРєР° С‡РµСЂРµР· С‚РѕС‡РєСѓ, Р»РµР¶Р°С‰СѓСЋ РІ С†РµРЅС‚СЂРµ РїР°СЂР°Р»Р»РµР»РµРїРёРїРµРґР°
 	float try_arr[4] = { center[0], center[1], center[2], 1 };
 	float sum = 0;
 	for (int i = 0; i < 6; i++)
 	{
 		sum = 0;
 		for (int j = 0; j < 4; j++) sum += (try_arr[j] * Matr_of_flat_equation[j][i]);
-		if (sum >= 0)// Следует домножить всё уравнение на -1
+		if (sum >= 0)// РЎР»РµРґСѓРµС‚ РґРѕРјРЅРѕР¶РёС‚СЊ РІСЃС‘ СѓСЂР°РІРЅРµРЅРёРµ РЅР° -1
 			for (int j = 0; j < 4; j++) Matr_of_flat_equation[j][i] *= -1;
 	}
-	//Центральные точки каждой грани
+	//Р¦РµРЅС‚СЂР°Р»СЊРЅС‹Рµ С‚РѕС‡РєРё РєР°Р¶РґРѕР№ РіСЂР°РЅРё
 	float dot_of_center_of_edge[6][4] =
 	{ { (A[0][0] + A[1][0] + A[2][0] + A[3][0]) / 4, (A[0][1] + A[1][1] + A[2][1] + A[3][1]) / 4 , (A[0][2] + A[1][2] + A[2][2] + A[3][2]) / 4, 1},
 	{ (A[4][0] + A[5][0] + A[6][0] + A[7][0]) / 4, (A[4][1] + A[5][1] + A[6][1] + A[7][1]) / 4 , (A[4][2] + A[5][2] + A[6][2] + A[7][2]) / 4, 1},
@@ -150,65 +150,65 @@ void Figure::equation_of_flat(int num_of_flat, int T1, int T2, int T3, int T4)
 		z1 = A[T1][2], z2 = A[T2][2], z3 = A[T3][2], z4 = A[T4][2];
 	float v1[3] = { x2 - x1, y2 - y1, z2 - z1 };//v1
 	float v2[3] = { x3 - x1, y3 - y1, z3 - z1 };//v2
-	Matr_of_flat_equation[0][num_of_flat] = (v1[1] * v2[2] - v1[2] * v2[1]); //Находим коэфф А
-	Matr_of_flat_equation[1][num_of_flat] = (v1[2] * v2[0] - v1[0] * v2[2]); //Находим коэфф B
-	Matr_of_flat_equation[2][num_of_flat] = (v1[0] * v2[1] - v1[1] * v2[0]); //Находим коэфф C
+	Matr_of_flat_equation[0][num_of_flat] = (v1[1] * v2[2] - v1[2] * v2[1]); //РќР°С…РѕРґРёРј РєРѕСЌС„С„ Рђ
+	Matr_of_flat_equation[1][num_of_flat] = (v1[2] * v2[0] - v1[0] * v2[2]); //РќР°С…РѕРґРёРј РєРѕСЌС„С„ B
+	Matr_of_flat_equation[2][num_of_flat] = (v1[0] * v2[1] - v1[1] * v2[0]); //РќР°С…РѕРґРёРј РєРѕСЌС„С„ C
 	Matr_of_flat_equation[3][num_of_flat] = -(Matr_of_flat_equation[0][num_of_flat] * ((x1 + x2 + x3 + x4) / 4)
 		+ Matr_of_flat_equation[1][num_of_flat] * ((y1 + y2 + y3 + y4) / 4)
-		+ Matr_of_flat_equation[2][num_of_flat] * ((z1 + z2 + z3 + z4) / 4)); //Находим коэфф D
+		+ Matr_of_flat_equation[2][num_of_flat] * ((z1 + z2 + z3 + z4) / 4)); //РќР°С…РѕРґРёРј РєРѕСЌС„С„ D
 	for (int i = 0; i < 4; i++)
 		Matr_of_flat_equation[i][num_of_flat] = Matr_of_flat_equation[i][num_of_flat] / Matr_of_flat_equation[3][num_of_flat];
 }
-void Figure::draw()// рисуем параллелипипед
+void Figure::draw()// СЂРёСЃСѓРµРј РїР°СЂР°Р»Р»РµР»РёРїРёРїРµРґ
 {
-	//Установка новых точек центра
+	//РЈСЃС‚Р°РЅРѕРІРєР° РЅРѕРІС‹С… С‚РѕС‡РµРє С†РµРЅС‚СЂР°
 	float a = 0, b = 0, c = 0;
 	for (int i = 0; i < 8; i++) { a += A[i][0]; b += A[i][1]; c += A[i][2]; }
 	a /= 8; b /= 8; c /= 8;
 	center[0] = a; center[1] = b; center[2] = c;
-	draw_shadow();//Рисуем тень
-	del_invisible_line();// Вычисление удаляемых и теневых плоскостей
-	//Рисование основной фигуры
-	//Центральная проекция
-	float L[8][2], zk = observer[2], zm = 600; //Задание данных подобрано вручную. zk - расстояние до глаза, zm расстояние от 3D-объекта до монитора.
+	draw_shadow();//Р РёСЃСѓРµРј С‚РµРЅСЊ
+	del_invisible_line();// Р’С‹С‡РёСЃР»РµРЅРёРµ СѓРґР°Р»СЏРµРјС‹С… Рё С‚РµРЅРµРІС‹С… РїР»РѕСЃРєРѕСЃС‚РµР№
+	//Р РёСЃРѕРІР°РЅРёРµ РѕСЃРЅРѕРІРЅРѕР№ С„РёРіСѓСЂС‹
+	//Р¦РµРЅС‚СЂР°Р»СЊРЅР°СЏ РїСЂРѕРµРєС†РёСЏ
+	float L[8][2], zk = observer[2], zm = 600; //Р—Р°РґР°РЅРёРµ РґР°РЅРЅС‹С… РїРѕРґРѕР±СЂР°РЅРѕ РІСЂСѓС‡РЅСѓСЋ. zk - СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РіР»Р°Р·Р°, zm СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ 3D-РѕР±СЉРµРєС‚Р° РґРѕ РјРѕРЅРёС‚РѕСЂР°.
 	for (int i = 0; i < 8; i++)
 	{
 		L[i][0] = A[i][0] * (zk - zm) / (zk - A[i][2]);
 		L[i][1] = A[i][1] * (zk - zm) / (zk - A[i][2]);
 	}
-	//Сделать заливку
-	//Если матрица произведений уравнений плоскости на вектор источника света больше или равна 0, то грань не в тени. Иначе в тени.
-	// грань из точек 0-1-2-3
+	//РЎРґРµР»Р°С‚СЊ Р·Р°Р»РёРІРєСѓ
+	//Р•СЃР»Рё РјР°С‚СЂРёС†Р° РїСЂРѕРёР·РІРµРґРµРЅРёР№ СѓСЂР°РІРЅРµРЅРёР№ РїР»РѕСЃРєРѕСЃС‚Рё РЅР° РІРµРєС‚РѕСЂ РёСЃС‚РѕС‡РЅРёРєР° СЃРІРµС‚Р° Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅР° 0, С‚Рѕ РіСЂР°РЅСЊ РЅРµ РІ С‚РµРЅРё. РРЅР°С‡Рµ РІ С‚РµРЅРё.
+	// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 0-1-2-3
 	if (mull_equ_and_observer[0] >= 0)
 	{
 		if (mull_equ_and_light[0] >= 0) drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[2][0], L[2][1], L[3][0], L[3][1], 1, 0);
 		else drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[2][0], L[2][1], L[3][0], L[3][1], 0, 1);
 	}
-	// грань из точек 4-5-6-7
+	// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 4-5-6-7
 	if (mull_equ_and_observer[1] >= 0)
 	{
 		if (mull_equ_and_light[1] >= 0) drawgran(L[4][0], L[4][1], L[5][0], L[5][1], L[6][0], L[6][1], L[7][0], L[7][1], 1, 0);
 		else drawgran(L[4][0], L[4][1], L[5][0], L[5][1], L[6][0], L[6][1], L[7][0], L[7][1], 0, 1);
 	}
-	// грань из точек 0-1-5-4
+	// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 0-1-5-4
 	if (mull_equ_and_observer[2] >= 0)
 	{
 		if (mull_equ_and_light[2] >= 0) drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[5][0], L[5][1], L[4][0], L[4][1], 1, 0);
 		else drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[5][0], L[5][1], L[4][0], L[4][1], 0, 1);
 	}
-	// грань из точек 5-1-2-6
+	// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 5-1-2-6
 	if (mull_equ_and_observer[3] >= 0)
 	{
 		if (mull_equ_and_light[3] >= 0) drawgran(L[5][0], L[5][1], L[1][0], L[1][1], L[2][0], L[2][1], L[6][0], L[6][1], 1, 0);
 		else drawgran(L[5][0], L[5][1], L[1][0], L[1][1], L[2][0], L[2][1], L[6][0], L[6][1], 0, 1);
 	}
-	// грань из точек 6-2-3-7
+	// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 6-2-3-7
 	if (mull_equ_and_observer[4] >= 0)
 	{
 		if (mull_equ_and_light[4] >= 0) drawgran(L[6][0], L[6][1], L[2][0], L[2][1], L[3][0], L[3][1], L[7][0], L[7][1], 1, 0);
 		else drawgran(L[6][0], L[6][1], L[2][0], L[2][1], L[3][0], L[3][1], L[7][0], L[7][1], 0, 1);
 	}
-	// грань из точек 7-3-0-4
+	// РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 7-3-0-4
 	if (mull_equ_and_observer[5] >= 0)
 	{
 		if (mull_equ_and_light[5] >= 0) drawgran(L[7][0], L[7][1], L[3][0], L[3][1], L[0][0], L[0][1], L[4][0], L[4][1], 1, 0);
@@ -223,16 +223,16 @@ int Figure::fill(int x_pixel, int y_pixel, int flag, bool** array_of_paint_pixel
 	int flag_fill = 0;
 	if (array_of_paint_pixel[y_pixel][x_pixel] != true)
 	{
-		if (flag == 0) color1 = color2 = color3 = 70; //Цвет тени
+		if (flag == 0) color1 = color2 = color3 = 70; //Р¦РІРµС‚ С‚РµРЅРё
 		else { color1 = 255; color2 = 255; color3 = 0; }
-		stack_obg.push(x_pixel);// Помещаем в стек затравочный x_pixel
-		stack_obg.push(y_pixel);//Помещаем в стек затравочный y_pixel
+		stack_obg.push(x_pixel);// РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ x_pixel
+		stack_obg.push(y_pixel);//РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ y_pixel
 		while (stack_obg.empty() != true)
 		{
-			//Извлекаем x и y с верхушки стэка
+			//РР·РІР»РµРєР°РµРј x Рё y СЃ РІРµСЂС…СѓС€РєРё СЃС‚СЌРєР°
 			y_now = stack_obg.top(); stack_obg.pop();
 			x_now = stack_obg.top(); stack_obg.pop();
-			x_right = x_now; //Для x_right
+			x_right = x_now; //Р”Р»СЏ x_right
 			while ((array_of_paint_pixel[y_now][x_right] != true) || (x_right == x_now))
 			{
 				array_of_paint_pixel[y_now][x_right] = true;
@@ -240,7 +240,7 @@ int Figure::fill(int x_pixel, int y_pixel, int flag, bool** array_of_paint_pixel
 				x_right++;
 				if (x_right == 1370) { return 1; }
 			}
-			x_left = x_now; //Для x _left
+			x_left = x_now; //Р”Р»СЏ x _left
 			while ((array_of_paint_pixel[y_now][x_left] != true) || (x_left == x_now))
 			{
 				array_of_paint_pixel[y_now][x_left] = true;
@@ -250,7 +250,7 @@ int Figure::fill(int x_pixel, int y_pixel, int flag, bool** array_of_paint_pixel
 			}
 			x_left++; x_right--;
 			for (int i = x_left; i <= x_right; i++) putpixel(i, y_now, RGB(color1, color2, color3));
-			//Проверка строки выше
+			//РџСЂРѕРІРµСЂРєР° СЃС‚СЂРѕРєРё РІС‹С€Рµ
 			bool flag_1 = 0;
 			int y = y_now + 1;
 			for (int x = x_left; x <= x_right; x++)
@@ -258,36 +258,36 @@ int Figure::fill(int x_pixel, int y_pixel, int flag, bool** array_of_paint_pixel
 				if (array_of_paint_pixel[y][x] == false) flag_1 = 1;
 				if ((flag_1 == 1) && (array_of_paint_pixel[y][x + 1] == true))
 				{
-					//Помещаем данный пиксель в стэк
-					stack_obg.push(x);// Помещаем в стек затравочный x_pixel
-					stack_obg.push(y);//Помещаем в стек затравочный y_pixel
+					//РџРѕРјРµС‰Р°РµРј РґР°РЅРЅС‹Р№ РїРёРєСЃРµР»СЊ РІ СЃС‚СЌРє
+					stack_obg.push(x);// РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ x_pixel
+					stack_obg.push(y);//РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ y_pixel
 					flag_1 = 0;
 				}
 				if ((x == x_right) && (flag_1 == 1))
 				{
-					//Помещаем данный пиксель в стэк
-					stack_obg.push(x);// Помещаем в стек затравочный x_pixel
-					stack_obg.push(y);//Помещаем в стек затравочный y_pixel
+					//РџРѕРјРµС‰Р°РµРј РґР°РЅРЅС‹Р№ РїРёРєСЃРµР»СЊ РІ СЃС‚СЌРє
+					stack_obg.push(x);// РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ x_pixel
+					stack_obg.push(y);//РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ y_pixel
 					flag_1 = 0;
 				}
 			}
-			//Проверка строки ниже
+			//РџСЂРѕРІРµСЂРєР° СЃС‚СЂРѕРєРё РЅРёР¶Рµ
 			y = y_now - 1; flag_1 = 0;
 			for (int x = x_left; x <= x_right; x++)
 			{
 				if (array_of_paint_pixel[y][x] == false) flag_1 = 1; 
 				if ((flag_1 == 1) && (array_of_paint_pixel[y][x + 1] == true))
 				{
-					//Помещаем данный пиксель в стэк
-					stack_obg.push(x);// Помещаем в стек затравочный x_pixel
-					stack_obg.push(y);//Помещаем в стек затравочный y_pixel
+					//РџРѕРјРµС‰Р°РµРј РґР°РЅРЅС‹Р№ РїРёРєСЃРµР»СЊ РІ СЃС‚СЌРє
+					stack_obg.push(x);// РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ x_pixel
+					stack_obg.push(y);//РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ y_pixel
 					flag_1 = 0;
 				}
 				if ((x == x_right) && (flag_1 == 1))
 				{
-					//Помещаем данный пиксель в стэк
-					stack_obg.push(x);// Помещаем в стек затравочный x_pixel
-					stack_obg.push(y);//Помещаем в стек затравочный y_pixel
+					//РџРѕРјРµС‰Р°РµРј РґР°РЅРЅС‹Р№ РїРёРєСЃРµР»СЊ РІ СЃС‚СЌРє
+					stack_obg.push(x);// РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ x_pixel
+					stack_obg.push(y);//РџРѕРјРµС‰Р°РµРј РІ СЃС‚РµРє Р·Р°С‚СЂР°РІРѕС‡РЅС‹Р№ y_pixel
 					flag_1 = 0;
 				}
 			}
@@ -301,27 +301,27 @@ void Figure::draw_shadow()
 	int xl = light[0], yl = light[1], zl = light[2];
 	int xp = 0, yp = 0, zp = 0;
 	//dot_of_shadow[8][4]
-	//Взять проекцую точек на плоскость пола
+	//Р’Р·СЏС‚СЊ РїСЂРѕРµРєС†СѓСЋ С‚РѕС‡РµРє РЅР° РїР»РѕСЃРєРѕСЃС‚СЊ РїРѕР»Р°
 	for (int i = 0; i < 8; i++)
 	{
 		xp = A[i][0]; yp = A[i][1]; zp = A[i][2];
 		dot_of_shadow[i][0] = xp; dot_of_shadow[i][1] = y_floor;
 		dot_of_shadow[i][2] = zp; dot_of_shadow[i][3] = 1;
 	}
-	//Рисование и заливка тени
-	float L[8][2], zk = observer[2], zm = 600; //Задание данных подобрано вручную. zk - расстояние до глаза, zm расстояние от 3D-объекта до монитора.
+	//Р РёСЃРѕРІР°РЅРёРµ Рё Р·Р°Р»РёРІРєР° С‚РµРЅРё
+	float L[8][2], zk = observer[2], zm = 600; //Р—Р°РґР°РЅРёРµ РґР°РЅРЅС‹С… РїРѕРґРѕР±СЂР°РЅРѕ РІСЂСѓС‡РЅСѓСЋ. zk - СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РіР»Р°Р·Р°, zm СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ 3D-РѕР±СЉРµРєС‚Р° РґРѕ РјРѕРЅРёС‚РѕСЂР°.
 	for (int i = 0; i < 8; i++)
 	{
 		L[i][0] = dot_of_shadow[i][0] * (zk - zm) / (zk - dot_of_shadow[i][2]);
 		L[i][1] = dot_of_shadow[i][1] * (zk - zm) / (zk - dot_of_shadow[i][2]);
 	}
 	
-	drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[2][0], L[2][1], L[3][0], L[3][1], 0, 0); //грань из точек 0-1-2-3
-	drawgran(L[4][0], L[4][1], L[5][0], L[5][1], L[6][0], L[6][1], L[7][0], L[7][1], 0, 0); //грань из точек 4-5-6-7
-	drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[5][0], L[5][1], L[4][0], L[4][1], 0, 0); //грань из точек 0-1-5-4
-	drawgran(L[5][0], L[5][1], L[1][0], L[1][1], L[2][0], L[2][1], L[6][0], L[6][1], 0, 0); //грань из точек 5-1-2-6
-	drawgran(L[6][0], L[6][1], L[2][0], L[2][1], L[3][0], L[3][1], L[7][0], L[7][1], 0, 0); //грань из точек 6-2-3-7
-	drawgran(L[7][0], L[7][1], L[3][0], L[3][1], L[0][0], L[0][1], L[4][0], L[4][1], 0, 0); //грань из точек 7-3-0-4
+	drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[2][0], L[2][1], L[3][0], L[3][1], 0, 0); //РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 0-1-2-3
+	drawgran(L[4][0], L[4][1], L[5][0], L[5][1], L[6][0], L[6][1], L[7][0], L[7][1], 0, 0); //РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 4-5-6-7
+	drawgran(L[0][0], L[0][1], L[1][0], L[1][1], L[5][0], L[5][1], L[4][0], L[4][1], 0, 0); //РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 0-1-5-4
+	drawgran(L[5][0], L[5][1], L[1][0], L[1][1], L[2][0], L[2][1], L[6][0], L[6][1], 0, 0); //РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 5-1-2-6
+	drawgran(L[6][0], L[6][1], L[2][0], L[2][1], L[3][0], L[3][1], L[7][0], L[7][1], 0, 0); //РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 6-2-3-7
+	drawgran(L[7][0], L[7][1], L[3][0], L[3][1], L[0][0], L[0][1], L[4][0], L[4][1], 0, 0); //РіСЂР°РЅСЊ РёР· С‚РѕС‡РµРє 7-3-0-4
 }
 void Figure::move(int flag)
 {
@@ -337,7 +337,7 @@ void Figure::move(int flag)
 	if (flag == 9) dz = d;
 	Vertex B((1), (0), (0), (dx), (0), (1), (0), (dy), (0), (0), (1), (dz), (0), (0), (0), (1));
 	N* B;
-	//Проверка выхода за границы массива
+	//РџСЂРѕРІРµСЂРєР° РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР°
 	if (N.going_abroad() == false) * this = N;
 }
 void Figure::scale(int flag)
@@ -355,7 +355,7 @@ void Figure::scale(int flag)
 	Vertex Bd((1), (0), (0), (-dx), (0), (1), (0), (-dy), (0), (0), (1), (-dz), (0), (0), (0), (1));
 	Vertex Bmd((1), (0), (0), (dx), (0), (1), (0), (dy), (0), (0), (1), (dz), (0), (0), (0), (1));
 	N* Bd; N* B; N* Bmd;
-	//Проверка выхода за границы массива
+	//РџСЂРѕРІРµСЂРєР° РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР°
 	if (N.going_abroad() == false) *this = N;
 }
 void Figure::rotate(int flag, int flag2)
@@ -364,33 +364,33 @@ void Figure::rotate(int flag, int flag2)
 	N = *this;
 	const double fi = 0.1;// 0.033
 	double dx = 0, dy = 0, dz = 0;
-	//находим центр
+	//РЅР°С…РѕРґРёРј С†РµРЅС‚СЂ
 	for (int i = 0; i < 8; i++) { dx += A[i][0]; dy += A[i][1]; dz += A[i][2]; }
 	dx /= 8; dy /= 8; dz /= 8;
 	Vertex Bd((1), (0), (0), (-dx), (0), (1), (0), (-dy), (0), (0), (1), (-dz), (0), (0), (0), (1));
 	Vertex Bmd((1), (0), (0), (dx), (0), (1), (0), (dy), (0), (0), (1), (dz), (0), (0), (0), (1));
 	double U = flag2 ? fi : -fi;
-	if (flag == 1)//вокруг х
+	if (flag == 1)//РІРѕРєСЂСѓРі С…
 	{
 		Vertex B((1), (0), (0), (0), (0), (cos(U)), (-sin(U)), (0), (0), (sin(U)), (cos(U)), (0), (0), (0), (0), (1));
 		N* Bd; N* B; N* Bmd;
 	}
-	if (flag == 2)// вокруг у
+	if (flag == 2)// РІРѕРєСЂСѓРі Сѓ
 	{
 		Vertex B((cos(U)), (0), (-sin(U)), (0), (0), (1), (0), (0), (sin(U)), (0), ((cos(U))), (0), (0), (0), (0), (1));
 		N* Bd; N* B; N* Bmd;
 	}
-	if (flag == 3)// вокруг z
+	if (flag == 3)// РІРѕРєСЂСѓРі z
 	{
 		Vertex B((cos(U)), (-sin(U)), (0), (0), (sin(U)), (cos(U)), (0), (0), (0), (0), (1), (0), (0), (0), (0), (1));
 		N* Bd; N* B; N* Bmd;
 	}
-	//Проверка выхода за границы массива
+	//РџСЂРѕРІРµСЂРєР° РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР°
 	if (N.going_abroad() == false) *this = N;
 }
 bool Figure::going_abroad()
 {
-	float L[8][2], zk = observer[2], zm = 600; //Задание данных подобрано вручную. zk - расстояние до глаза, zm расстояние от 3D-объекта до монитора.
+	float L[8][2], zk = observer[2], zm = 600; //Р—Р°РґР°РЅРёРµ РґР°РЅРЅС‹С… РїРѕРґРѕР±СЂР°РЅРѕ РІСЂСѓС‡РЅСѓСЋ. zk - СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РіР»Р°Р·Р°, zm СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ 3D-РѕР±СЉРµРєС‚Р° РґРѕ РјРѕРЅРёС‚РѕСЂР°.
 	bool flag_1 = false;
 	for (int i = 0; i < 8; i++)
 	{
