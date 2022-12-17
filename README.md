@@ -4,7 +4,7 @@
 
 •	Версия компилятора: 16.11.8
 
-•	Библиотека graphics.h (https://github.com/ahuynh359/Graphics
+•	Библиотека graphics.h (https://github.com/ahuynh359/Graphics)
 
 
 
